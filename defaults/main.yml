@@ -9,7 +9,6 @@ redis_group: '{{ redis_user }}'
 redis_cluster: false
 redis_daemon: 'redis-{{ redis_port }}'
 redis_conf_path: '/etc/redis/{{ redis_port }}.conf'
-redis_travis_ci: false
 
 # Configuration
 redis_bind: 0.0.0.0

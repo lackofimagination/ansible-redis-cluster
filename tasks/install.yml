@@ -4,9 +4,8 @@
     name: vm.overcommit_memory
     value: 1
     state: present
-    reload: yes
-    ignoreerrors: yes
-  when: not redis_travis_ci
+    reload: false
+    ignoreerrors: false
 
 - name: create install directory
   file:
@@ -26,7 +25,7 @@
 
 - name: check if redis user exists
   command: 'id {{ redis_user }}'
-  ignore_errors: yes
+  ignore_errors: false
   changed_when: false
   register: user_exists
 
@@ -43,7 +42,7 @@
     comment: 'redis'
     home: '{{ redis_install_dir }}'
     shell: '/bin/false'
-    system: yes
+    system: false
   when: user_exists is failed
 
 - name: create /var/run/redis

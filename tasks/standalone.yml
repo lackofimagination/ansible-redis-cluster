@@ -3,7 +3,7 @@
   file:
     path: '{{ redis_working_dir }}'
     state: directory
-    recurse: yes
+    recurse: true
     owner: '{{ redis_user }}'
 
 - name: check whether log directory exists
@@ -75,4 +75,4 @@
   service:
     name: '{{ redis_daemon }}'
     state: started
-    enabled: yes
+    enabled: true

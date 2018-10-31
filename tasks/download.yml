@@ -9,4 +9,4 @@
     src: '/usr/local/src/redis-{{ redis_version }}.tar.gz'
     dest: '/usr/local/src'
     creates: '/usr/local/src/redis-{{ redis_version }}/Makefile'
-    copy: no
+    copy: false
