@@ -7,6 +7,7 @@
 # Short-Description: Redis data structure server
 # Description: Redis data structure server. See https://redis.io
 ### END INIT INFO
+set -e
 
 . /lib/lsb/init-functions
 
@@ -38,7 +39,7 @@ fi
 case "$1" in
   start)
     if [ -f $PIDFILE ]; then
-      status_of_proc -p "$PIDFILE" $EXEC "$NAME process" && return 0
+      status_of_proc -p "$PIDFILE" $EXEC "$NAME process"
     fi
 
     log_daemon_msg "Starting Redis server..."
@@ -65,7 +66,7 @@ case "$1" in
     fi
     ;;
   status)
-    status_of_proc -p "$PIDFILE" $EXEC "$NAME" && exit 0 || exit $?
+    status_of_proc -p "$PIDFILE" $EXEC "$NAME"
     ;;
   restart|force-reload)
     ${0} stop
