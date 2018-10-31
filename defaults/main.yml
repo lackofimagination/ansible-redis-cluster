@@ -11,7 +11,7 @@ redis_daemon: 'redis-{{ redis_port }}'
 redis_conf_path: '/etc/redis/{{ redis_port }}.conf'
 
 # Configuration
-redis_bind: 0.0.0.0
+redis_bind: 127.0.0.1
 redis_protected_mode: 'yes'
 redis_port: 6379
 redis_tcp_backlog: 511
