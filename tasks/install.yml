@@ -5,7 +5,7 @@
     value: 1
     state: present
     reload: false
-    ignoreerrors: false
+    ignoreerrors: true
 
 - name: create install directory
   file:
@@ -25,7 +25,7 @@
 
 - name: check if redis user exists
   command: 'id {{ redis_user }}'
-  ignore_errors: false
+  ignore_errors: true
   changed_when: false
   register: user_exists
 
