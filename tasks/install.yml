@@ -41,7 +41,7 @@
     group: '{{ redis_group }}'
     comment: 'redis'
     home: '{{ redis_install_dir }}'
-    shell: '/bin/false'
+    shell: '/sbin/nologin'
     system: false
   when: user_exists is failed
 
