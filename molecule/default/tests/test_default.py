@@ -18,7 +18,6 @@ def test_redis_conf_file(host):
 
     assert f.exists
     assert f.user == 'redis'
-    assert f.group == 'redis'
 
     s = list(filter(lambda x: len(x) > 0, f.content_string.split("\n")))
 
@@ -33,7 +32,6 @@ def test_redis_init_file(host):
 
 
 def test_redis_service(host):
-    s = host.service('redis-6379')
+    f = host.file('/var/run/redis/6379.pid')
 
-    assert s.is_running
-    assert s.is_enabled
+    assert f.exists

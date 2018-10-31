@@ -17,6 +17,11 @@ CLIEXEC="{{ redis_install_dir }}/bin/redis-cli -p ${REDISPORT}"
 PIDFILE={{ redis_pidfile }}
 CONF={{ redis_conf_path }}
 REDISUSER={{ redis_user }}
+{% if redis_appendonly == 'no' -%}
+SHUTDOWN="shutdown nosave"
+{% else -%}
+SHUTDOWN="shutdown save"
+{% endif -%}
 
 if [ -r /etc/default/redis_${REDISPORT} ]; then
   . /etc/default/redis_${REDISPORT}
@@ -32,30 +37,26 @@ fi
 
 case "$1" in
   start)
-    if [ -f $PIDFILE ]
-    then
+    if [ -f $PIDFILE ]; then
       status_of_proc -p "$PIDFILE" $EXEC "$NAME process" && return 0
+    fi
+
+    log_daemon_msg "Starting Redis server..."
+    if start-stop-daemon --start -q --oknodo -p "$PIDFILE" -c $REDISUSER --exec $EXEC -- $CONF; then
+      log_end_msg 0
     else
-      log_daemon_msg "Starting Redis server..."
-      if start-stop-daemon --start -q --oknodo -p "$PIDFILE" -c $REDISUSER --exec $EXEC -- $CONF
-      then
-        log_end_msg 0
-      else
-        log_end_msg 1
-      fi
+      log_end_msg 1
     fi
     ;;
   stop)
-    if [ ! -f $PIDFILE ]
-    then
+    if [ ! -f $PIDFILE ]; then
       log_daemon_msg "$PIDFILE does not exist, process is not running"
       log_end_msg 0
     else
-      PID=$(cat $PIDFILE)
+      PID=$(cat "$PIDFILE")
       log_daemon_msg "Stopping..."
-      $CLIEXEC -p $REDISPORT shutdown
-      while [ -x /proc/${PID} ]
-      do
+      $CLIEXEC $SHUTDOWN
+      while [ -x /proc/${PID} ]; do
         log_daemon_msg "Waiting for Redis to shutdown..."
         sleep 1
       done

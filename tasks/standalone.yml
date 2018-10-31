@@ -66,10 +66,10 @@
     dest: '{{ redis_conf_path }}'
     owner: '{{ redis_user }}'
     mode: 0644
-  notify: 'restart redis'
+    # notify: 'restart redis'
 
-- name: flush handlers
-  meta: flush_handlers
+    # - name: flush handlers
+    #  meta: flush_handlers
 
 - name: ensure redis is running
   service:

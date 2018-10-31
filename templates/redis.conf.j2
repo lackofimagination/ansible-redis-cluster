@@ -87,16 +87,14 @@ aof-load-truncated {{ redis_aof_load_truncated }}
 aof-use-rdb-preamble {{ redis_aof_use_rdb_preamble }}
 lua-time-limit {{ redis_lua_time_limit }}
 
-# cluster-enabled yes
-# cluster-config-file nodes-6379.conf
-# cluster-node-timeout 15000
-# cluster-replica-validity-factor 10
-# cluster-migration-barrier 1
-# cluster-require-full-coverage yes
-# cluster-replica-no-failover no
-# cluster-announce-ip 10.1.1.5
-# cluster-announce-port 6379
-# cluster-announce-bus-port 6380
+{% if redis_cluster_enabled -%}
+cluster-enabled yes
+cluster-node-timeout {{ redis_cluster_node_timeout }}
+cluster-replica-validity-factor {{ redis_cluster_replica_validity_factor }}
+cluster-migration-barrier {{ redis_cluster_migration_barrier }}
+cluster-require-full-coverage {{ redis_cluster_require_full_coverage }}
+cluster-replica-no-failover {{ redis_cluster_replica_no_failover }}
+{% endif -%}
 
 slowlog-log-slower-than {{ redis_slowlog_log_slower_than }}
 slowlog-max-len {{ redis_slowlog_max_len }}

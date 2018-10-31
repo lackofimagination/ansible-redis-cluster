@@ -20,7 +20,7 @@ redis_timeout: 0
 redis_tcp_keepalive: 300
 redis_daemonize: 'yes'
 redis_supervised: 'no'
-redis_pidfile: '/var/run/redis_{{ redis_port }}.pid'
+redis_pidfile: '/var/run/redis/{{ redis_port }}.pid'
 redis_loglevel: 'notice'
 redis_logfile: '""'
 redis_syslog_enabled: false
@@ -85,3 +85,11 @@ redis_aof_rewrite_incremental_fsync: 'yes'
 redis_rdb_save_incremental_fsync: 'yes'
 redis_lfu_log_factor: 10
 redis_lfu_decay_time: 1
+
+# Cluster configuration
+redis_cluster_enabled: '{{ redis_cluster }}'
+redis_cluster_node_timeout: 15000
+redis_cluster_replica_validity_factor: 10
+redis_cluster_migration_barrier: 1
+redis_cluster_require_full_coverage: 'yes'
+redis_cluster_replica_no_failover: 'no'
