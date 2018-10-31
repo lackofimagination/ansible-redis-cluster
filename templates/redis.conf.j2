@@ -1,0 +1,128 @@
+# {{ ansible_managed }}
+
+bind {{ redis_bind }}
+protected-mode {{ redis_protected_mode }}
+port {{ redis_port }}
+tcp-backlog {{ redis_tcp_backlog }}
+
+{% if redis_unixsocket -%}
+unixsocket {{ redis_unixsocket }}
+unixsocketperm 700
+{% endif -%}
+
+timeout {{ redis_timeout }}
+tcp-keepalive {{ redis_tcp_keepalive }}
+daemonize {{ redis_daemonize }}
+supervised {{ redis_supervised }}
+pidfile {{ redis_pidfile }}
+loglevel {{ redis_loglevel }}
+logfile {{ redis_logfile }}
+
+{% if redis_syslog_enabled -%}
+syslog-enabled yes
+syslog-ident {{ redis_syslog_ident }}
+syslog-facility {{ redis_syslog_facility }}
+{% else -%}
+syslog-enabled no
+{% endif -%}
+
+databases {{ redis_databases }}
+always-show-logo {{ redis_always_show_logo }}
+
+{% for save in redis_save -%}
+save {{ save }}
+{% endfor -%}
+
+stop-writes-on-bgsave-error {{ redis_stop_writes_on_bgsave_error }}
+rdbcompression {{ redis_rdbcompression }}
+rdbchecksum {{ redis_rdbchecksum }}
+dbfilename {{ redis_dbfilename }}
+dir {{ redis_dir }}
+
+# replicaof <masterip> <masterport>
+# masterauth <master-password>
+# replica-serve-stale-data yes
+# replica-read-only yes
+# repl-diskless-sync no
+# repl-diskless-sync-delay 5
+# repl-ping-replica-period 10
+# repl-timeout 60
+# repl-disable-tcp-nodelay no
+# repl-backlog-size 1mb
+# repl-backlog-ttl 3600
+# replica-priority 100
+# min-replicas-to-write 3
+# min-replicas-max-lag 10
+# replica-announce-ip 5.5.5.5
+# replica-announce-port 1234
+
+{% if redis_requirepass -%}
+requirepass {{ redis_requirepass }}
+{% endif -%}
+
+maxclients {{ redis_maxclients }}
+
+{% if redis_maxmemory -%}
+maxmemory {{ redis_maxmemory }}
+{% endif -%}
+
+maxmemory-policy {{ redis_maxmemory_policy }}
+maxmemory-samples {{ redis_maxmemory_samples }}
+
+# replica-ignore-maxmemory yes
+
+lazyfree-lazy-eviction {{ redis_lazyfree_lazy_eviction }}
+lazyfree-lazy-expire {{ redis_lazyfree_lazy_expire }}
+lazyfree-lazy-server-del {{ redis_lazyfree_lazy_server_del }}
+
+# replica-lazy-flush no
+
+appendonly {{ redis_appendonly }}
+appendfilename {{ redis_appendfilename }}
+appendfsync {{ redis_appendfsync }}
+no-appendfsync-on-rewrite {{ redis_no_appendfsync_on_rewrite }}
+auto-aof-rewrite-percentage {{ redis_auto_aof_rewrite_percentage }}
+auto-aof-rewrite-min-size {{ redis_auto_aof_rewrite_min_size }}
+aof-load-truncated {{ redis_aof_load_truncated }}
+aof-use-rdb-preamble {{ redis_aof_use_rdb_preamble }}
+lua-time-limit {{ redis_lua_time_limit }}
+
+# cluster-enabled yes
+# cluster-config-file nodes-6379.conf
+# cluster-node-timeout 15000
+# cluster-replica-validity-factor 10
+# cluster-migration-barrier 1
+# cluster-require-full-coverage yes
+# cluster-replica-no-failover no
+# cluster-announce-ip 10.1.1.5
+# cluster-announce-port 6379
+# cluster-announce-bus-port 6380
+
+slowlog-log-slower-than {{ redis_slowlog_log_slower_than }}
+slowlog-max-len {{ redis_slowlog_max_len }}
+latency-monitor-threshold {{ redis_latency_monitor_threshold }}
+notify-keyspace-events {{ redis_notify_keyspace_events }}
+hash-max-ziplist-entries {{ redis_hash_max_ziplist_entries }}
+hash-max-ziplist-value {{ redis_hash_max_ziplist_value }}
+list-max-ziplist-size {{ redis_list_max_ziplist_size }}
+list-compress-depth {{ redis_list_compress_depth }}
+set-max-intset-entries {{ redis_set_max_intset_entries }}
+zset-max-ziplist-entries {{ redis_zset_max_ziplist_entries }}
+zset-max-ziplist-value {{ redis_zset_max_ziplist_value }}
+hll-sparse-max-bytes {{ redis_hll_sparse_max_bytes }}
+stream-node-max-bytes {{ redis_stream_node_max_bytes }}
+stream-node-max-entries {{ redis_stream_node_max_entries }}
+activerehashing {{ redis_activerehashing }}
+
+{% for limit in redis_client_output_buffer_limit -%}
+client-output-buffer-limit {{ limit }}
+{% endfor -%}
+
+client-query-buffer-limit {{ redis_client_query_buffer_limit }}
+proto-max-bulk-len {{ redis_proto_max_bulk_len }}
+hz {{ redis_hz }}
+dynamic-hz {{ redis_dynamic_hz }}
+aof-rewrite-incremental-fsync {{ redis_aof_rewrite_incremental_fsync }}
+rdb-save-incremental-fsync {{ redis_rdb_save_incremental_fsync }}
+lfu-log-factor {{ redis_lfu_log_factor }}
+lfu-decay-time {{ redis_lfu_decay_time }}

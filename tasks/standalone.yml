@@ -1,0 +1,78 @@
+---
+- name: create working directory
+  file:
+    path: '{{ redis_working_dir }}'
+    state: directory
+    recurse: yes
+    owner: '{{ redis_user }}'
+
+- name: check whether log directory exists
+  stat:
+    path: '{{ redis_logfile | dirname }}'
+  register: logdir
+  changed_when: false
+  when: redis_logfile != '""'
+
+- name: create log directory
+  file:
+    state: directory
+    path: '{{ redis_logfile | dirname }}'
+    owner: '{{ redis_user }}'
+    group: '{{ redis_group }}'
+  when:
+    - redis_logfile != '""'
+    - not logdir.stat.exists
+
+- name: touch log file
+  file:
+    state: touch
+    path: '{{ redis_logfile }}'
+    owner: '{{ redis_user }}'
+    group: '{{ redis_group }}'
+  when: redis_logfile != '""'
+
+- name: check whether pid directory exists
+  stat:
+    path: '{{ redis_pidfile | dirname }}'
+  register: piddir
+  changed_when: false
+  when: redis_pidfile != '""'
+
+- name: create pid directory
+  file:
+    state: directory
+    path: '{{ redis_pidfile | dirname }}'
+    owner: '{{ redis_user }}'
+    group: '{{ redis_group }}'
+  when:
+    - redis_pidfile != '""'
+    - not piddir.stat.exists
+
+- name: create init script
+  template:
+    src: redis.init.j2
+    dest: '/etc/init.d/{{ redis_daemon }}'
+    mode: 0755
+
+- name: create init config file
+  template:
+    src: redis.init.conf.j2
+    dest: '/etc/default/{{ redis_daemon }}'
+    mode: 0600
+
+- name: create conf file
+  template:
+    src: redis.conf.j2
+    dest: '{{ redis_conf_path }}'
+    owner: '{{ redis_user }}'
+    mode: 0644
+  notify: 'restart redis'
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: ensure redis is running
+  service:
+    name: '{{ redis_daemon }}'
+    state: started
+    enabled: yes

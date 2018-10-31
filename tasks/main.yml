@@ -1,2 +1,6 @@
 ---
-# tasks file for ansible-redis-cluster
+- include: download.yml
+- include: dependencies.yml
+- include: install.yml
+- include: standalone.yml
+  when: not redis_cluster

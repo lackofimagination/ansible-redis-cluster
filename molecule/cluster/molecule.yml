@@ -1,0 +1,78 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: master-1
+    image: solita/ubuntu-systemd:xenial
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    cpu_period: 100000
+    cpu_quota: 25000
+    memory: 128M
+  - name: master-2
+    image: solita/ubuntu-systemd:xenial
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    cpu_period: 100000
+    cpu_quota: 25000
+    memory: 128M
+  - name: master-3
+    image: solita/ubuntu-systemd:xenial
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    cpu_period: 100000
+    cpu_quota: 25000
+    memory: 128M
+  - name: slave-1
+    image: solita/ubuntu-systemd:xenial
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    cpu_period: 100000
+    cpu_quota: 25000
+    memory: 128M
+  - name: slave-2
+    image: solita/ubuntu-systemd:xenial
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    cpu_period: 100000
+    cpu_quota: 25000
+    memory: 128M
+  - name: slave-3
+    image: solita/ubuntu-systemd:xenial
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    cpu_period: 100000
+    cpu_quota: 25000
+    memory: 128M
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: cluster
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
