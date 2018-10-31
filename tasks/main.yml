@@ -3,4 +3,3 @@
 - include: dependencies.yml
 - include: install.yml
 - include: standalone.yml
-  when: not redis_cluster

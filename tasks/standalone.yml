@@ -59,6 +59,7 @@
     src: redis.init.conf.j2
     dest: '/etc/default/{{ redis_daemon }}'
     mode: 0600
+  notify: restart redis
 
 - name: create conf file
   template:
@@ -66,6 +67,9 @@
     dest: '{{ redis_conf_path }}'
     owner: '{{ redis_user }}'
     mode: 0644
+  notify: restart redis
+
+- meta: flush_handlers
 
 - name: ensure redis is running
   service:
