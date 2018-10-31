@@ -21,7 +21,7 @@ def test_redis_conf_file(host):
 
     s = list(filter(lambda x: len(x) > 0, f.content_string.split('\n')))
 
-    assert 'bind 0.0.0.0' in s
+    assert 'bind 127.0.0.1' in s
     assert 'protected-mode yes' in s
     assert 'port 6379' in s
     assert 'tcp-backlog 511' in s

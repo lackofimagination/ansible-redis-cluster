@@ -21,7 +21,7 @@ def test_redis_conf_6378_file(host):
 
     s = list(filter(lambda x: len(x) > 0, f.content_string.split('\n')))
 
-    assert 'bind 0.0.0.0' in s
+    assert 'bind 127.0.0.1' in s
     assert 'port 6378' in s
 
 
@@ -33,7 +33,7 @@ def test_redis_conf_6379_file(host):
 
     s = list(filter(lambda x: len(x) > 0, f.content_string.split('\n')))
 
-    assert 'bind 0.0.0.0' in s
+    assert 'bind 127.0.0.1' in s
     assert 'port 6379' in s
 
 
