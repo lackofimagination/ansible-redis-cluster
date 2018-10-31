@@ -4,8 +4,12 @@ language: python
 services:
   - docker
 
+env:
+  - TEST_SCENARIO=default
+  - TEST_SCENARIO=dual
+
 install:
   - pip install molecule docker
 
 script:
-  - molecule test
+  - "molecule test --scenario-name $TEST_SCENARIO"

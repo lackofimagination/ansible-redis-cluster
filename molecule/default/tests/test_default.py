@@ -19,10 +19,10 @@ def test_redis_conf_file(host):
     assert f.exists
     assert f.user == 'redis'
 
-    s = list(filter(lambda x: len(x) > 0, f.content_string.split("\n")))
+    s = list(filter(lambda x: len(x) > 0, f.content_string.split('\n')))
 
-    assert "bind 0.0.0.0" in s
-    assert "port 6379" in s
+    assert 'bind 0.0.0.0' in s
+    assert 'port 6379' in s
 
 
 def test_redis_init_file(host):

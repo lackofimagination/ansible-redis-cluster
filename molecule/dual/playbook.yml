@@ -5,3 +5,6 @@
 
   roles:
     - role: ansible-redis-cluster
+      port: 6378
+    - role: ansible-redis-cluster
+      port: 6379
