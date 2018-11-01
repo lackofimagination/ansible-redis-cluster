@@ -1,0 +1,9 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: Xuxing Huang
+  description: Redis cluster installer.
+  license: Apache
+  min_ansible_version: 2.4
+  galaxy_tags: []
