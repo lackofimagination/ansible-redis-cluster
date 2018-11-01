@@ -7,7 +7,7 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: augustushuang/ubuntu-systemd:xenial
+    image: lackofimagination/ubuntu-systemd:latest
     command: /sbin/init
     capabilities:
       - SYS_ADMIN

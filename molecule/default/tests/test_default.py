@@ -86,13 +86,13 @@ def test_redis_init_file(host):
     assert f.exists
 
 
-def test_redis_service(host):
+def test_redis_pid_file(host):
     f = host.file('/var/run/redis/6379.pid')
 
     assert f.exists
 
 
-def test_redis_systemd(host):
+def test_redis_service(host):
     s = host.service('redis-6379')
 
     assert s.is_enabled

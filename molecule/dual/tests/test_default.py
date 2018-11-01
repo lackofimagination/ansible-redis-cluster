@@ -45,9 +45,19 @@ def test_redis_init_file(host):
     assert f2.exists
 
 
-def test_redis_service(host):
+def test_redis_pid_file(host):
     f1 = host.file('/var/run/redis/6378.pid')
     f2 = host.file('/var/run/redis/6379.pid')
 
     assert f1.exists
     assert f2.exists
+
+
+def test_redis_service(host):
+    s1 = host.service('redis-6378')
+    s2 = host.service('redis-6379')
+
+    assert s1.is_enabled
+    assert s1.is_running
+    assert s2.is_enabled
+    assert s2.is_running

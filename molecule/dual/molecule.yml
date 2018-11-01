@@ -7,7 +7,10 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
+    image: lackofimagination/ubuntu-systemd:latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true

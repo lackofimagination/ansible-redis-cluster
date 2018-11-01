@@ -6,59 +6,77 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: master-1
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
+  - name: instance-1
+    image: lackofimagination/ubuntu-systemd:latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cpu_period: 100000
-    cpu_quota: 25000
+    cpu_quota: 50000
     privileged: true
-    memory: 128M
+    memory: 256M
     pre_build_image: true
-  - name: master-2
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
+  - name: instance-2
+    image: lackofimagination/ubuntu-systemd:latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cpu_period: 100000
-    cpu_quota: 25000
+    cpu_quota: 50000
     privileged: true
-    memory: 128M
+    memory: 256M
     pre_build_image: true
-  - name: master-3
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
+  - name: instance-3
+    image: lackofimagination/ubuntu-systemd:latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cpu_period: 100000
-    cpu_quota: 25000
+    cpu_quota: 50000
     privileged: true
-    memory: 128M
+    memory: 256M
     pre_build_image: true
-  - name: slave-1
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
+  - name: instance-4
+    image: lackofimagination/ubuntu-systemd:latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cpu_period: 100000
-    cpu_quota: 25000
+    cpu_quota: 50000
     privileged: true
-    memory: 128M
+    memory: 256M
     pre_build_image: true
-  - name: slave-2
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
+  - name: instance-5
+    image: lackofimagination/ubuntu-systemd:latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cpu_period: 100000
-    cpu_quota: 25000
+    cpu_quota: 50000
     privileged: true
-    memory: 128M
+    memory: 256M
     pre_build_image: true
-  - name: slave-3
-    image: geerlingguy/docker-ubuntu1604-ansible:latest
+  - name: instance-6
+    image: lackofimagination/ubuntu-systemd:latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     cpu_period: 100000
-    cpu_quota: 25000
+    cpu_quota: 50000
     privileged: true
-    memory: 128M
+    memory: 256M
     pre_build_image: true
 provisioner:
   name: ansible
