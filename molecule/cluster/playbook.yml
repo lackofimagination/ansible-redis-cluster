@@ -1,5 +1,72 @@
 ---
 - name: Converge
   hosts: all
+    
   roles:
     - role: ansible-redis-cluster
+      redis_cluster_enabled: true
+
+- name: Converge
+  hosts: candidate
+  
+  pre_tasks:
+    - name: get ip of instance-1
+      local_action: 'shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} instance-1'
+      register: instance_1_ip
+      changed_when: false
+    - name: get ip of instance-2
+      local_action: 'shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} instance-2'
+      register: instance_2_ip
+      changed_when: false
+    - name: get ip of instance-3
+      local_action: 'shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} instance-3'
+      register: instance_3_ip
+      changed_when: false
+    - name: get ip of instance-4
+      local_action: 'shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} instance-4'
+      register: instance_4_ip
+      changed_when: false
+    - name: get ip of instance-5
+      local_action: 'shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} instance-5'
+      register: instance_5_ip
+      changed_when: false
+    - name: get ip of instance-6
+      local_action: 'shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} instance-6'
+      register: instance_6_ip
+      changed_when: false
+    - name: set fact of instance-1
+      set_fact:
+        instance_ip: '{{ instance_1_ip.stdout }}'
+      when: inventory_hostname == 'instance-1'
+    - name: set fact of instance-2
+      set_fact:
+        instance_ip: '{{ instance_2_ip.stdout }}'
+      when: inventory_hostname == 'instance-2'
+    - name: set fact of instance-3
+      set_fact:
+        instance_ip: '{{ instance_3_ip.stdout }}'
+      when: inventory_hostname == 'instance-3'
+    - name: set fact of instance-4
+      set_fact:
+        instance_ip: '{{ instance_4_ip.stdout }}'
+      when: inventory_hostname == 'instance-4'
+    - name: set fact of instance-5
+      set_fact:
+        instance_ip: '{{ instance_5_ip.stdout }}'
+      when: inventory_hostname == 'instance-5'
+    - name: set fact of instance-6
+      set_fact:
+        instance_ip: '{{ instance_6_ip.stdout }}'
+      when: inventory_hostname == 'instance-6'
+  
+  roles:
+    - role: ansible-redis-cluster
+      redis_cluster_enabled: true
+      redis_cluster_candidate: true
+      redis_cluster_nodes:
+        - '{{ instance_1_ip }}'
+        - '{{ instance_2_ip }}'
+        - '{{ instance_3_ip }}'
+        - '{{ instance_4_ip }}'
+        - '{{ instance_5_ip }}'
+        - '{{ instance_6_ip }}'

@@ -6,9 +6,11 @@ redis_working_dir: '/var/lib/redis/{{ redis_port }}'
 redis_download_url: 'http://download.redis.io/releases/redis-{{ redis_version }}.tar.gz'
 redis_user: 'redis'
 redis_group: '{{ redis_user }}'
-redis_cluster: false
 redis_daemon: 'redis-{{ redis_port }}'
 redis_conf_path: '/etc/redis/{{ redis_port }}.conf'
+redis_cluster_candidate: false
+redis_cluster_nodes: []
+redis_cluster_replicas: 1
 
 # Configuration
 redis_bind: 127.0.0.1
@@ -87,7 +89,7 @@ redis_lfu_log_factor: 10
 redis_lfu_decay_time: 1
 
 # Cluster configuration
-redis_cluster_enabled: '{{ redis_cluster }}'
+redis_cluster_enabled: false
 redis_cluster_node_timeout: 15000
 redis_cluster_config_file: 'nodes.conf'
 redis_cluster_replica_validity_factor: 10

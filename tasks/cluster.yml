@@ -1,0 +1,4 @@
+---
+- name: create a redis cluster
+  shell: 'redis-cli --cluster create {{ redis_cluster_nodes | join(" ") }}'
+  changed_when: false

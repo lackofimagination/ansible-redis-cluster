@@ -3,3 +3,5 @@
 - include: dependencies.yml
 - include: install.yml
 - include: standalone.yml
+- include: cluster.yml
+  when: redis_candidate

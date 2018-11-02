@@ -7,6 +7,9 @@ lint:
   name: yamllint
 platforms:
   - name: instance-1
+    groups:
+      - redis
+      - candidate
     image: lackofimagination/ubuntu-systemd:latest
     command: /sbin/init
     capabilities:
@@ -16,9 +19,11 @@ platforms:
     cpu_period: 100000
     cpu_quota: 50000
     privileged: true
-    memory: 256M
+    memory: 512M
     pre_build_image: true
   - name: instance-2
+    groups:
+      - redis
     image: lackofimagination/ubuntu-systemd:latest
     command: /sbin/init
     capabilities:
@@ -28,9 +33,11 @@ platforms:
     cpu_period: 100000
     cpu_quota: 50000
     privileged: true
-    memory: 256M
+    memory: 512M
     pre_build_image: true
   - name: instance-3
+    groups:
+      - redis
     image: lackofimagination/ubuntu-systemd:latest
     command: /sbin/init
     capabilities:
@@ -40,9 +47,11 @@ platforms:
     cpu_period: 100000
     cpu_quota: 50000
     privileged: true
-    memory: 256M
+    memory: 512M
     pre_build_image: true
   - name: instance-4
+    groups:
+      - redis
     image: lackofimagination/ubuntu-systemd:latest
     command: /sbin/init
     capabilities:
@@ -52,9 +61,11 @@ platforms:
     cpu_period: 100000
     cpu_quota: 50000
     privileged: true
-    memory: 256M
+    memory: 512M
     pre_build_image: true
   - name: instance-5
+    groups:
+      - redis
     image: lackofimagination/ubuntu-systemd:latest
     command: /sbin/init
     capabilities:
@@ -64,9 +75,11 @@ platforms:
     cpu_period: 100000
     cpu_quota: 50000
     privileged: true
-    memory: 256M
+    memory: 512M
     pre_build_image: true
   - name: instance-6
+    groups:
+      - redis
     image: lackofimagination/ubuntu-systemd:latest
     command: /sbin/init
     capabilities:
@@ -76,7 +89,7 @@ platforms:
     cpu_period: 100000
     cpu_quota: 50000
     privileged: true
-    memory: 256M
+    memory: 512M
     pre_build_image: true
 provisioner:
   name: ansible
