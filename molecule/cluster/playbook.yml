@@ -1,7 +1,7 @@
 ---
 - name: Converge
   hosts: all
- 
+
   roles:
     - role: ansible-redis-cluster
       redis_cluster_enabled: true
