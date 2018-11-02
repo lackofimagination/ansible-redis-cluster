@@ -95,6 +95,10 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+    enabled: true
+    options:
+      x:
+        - ANSIBLE0013
 scenario:
   name: cluster
 verifier:
