@@ -91,6 +91,7 @@ lua-time-limit {{ redis_lua_time_limit }}
 
 {% if redis_cluster_enabled -%}
 cluster-enabled yes
+cluster-config-file {{ redis_cluster_config_file }}
 cluster-node-timeout {{ redis_cluster_node_timeout }}
 cluster-replica-validity-factor {{ redis_cluster_replica_validity_factor }}
 cluster-migration-barrier {{ redis_cluster_migration_barrier }}
