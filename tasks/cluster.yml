@@ -19,4 +19,5 @@
     responses:
       ">>> Performing hash slots allocation": 'yes'
   changed_when: false
+  ignore_errors: true
   when: redis_cluster_candidate
