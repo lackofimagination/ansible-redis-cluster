@@ -1,5 +1,5 @@
 ---
 - name: create a redis cluster
-  shell: 'redis-cli --cluster create {{ redis_cluster_nodes | join(" ") }} --cluster-replicas {{ redis_cluster_replicas }}'
+  command: 'redis-cli --cluster create {{ redis_cluster_nodes | join(" ") }} --cluster-replicas {{ redis_cluster_replicas }}'
   changed_when: false
   when: redis_cluster_candidate

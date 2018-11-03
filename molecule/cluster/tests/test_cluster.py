@@ -9,6 +9,5 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_cluster_nodes(host):
     cmd = host.run('redis-cli cluster nodes')
 
-
     assert cmd.rc == 0
     assert len(cmd.stdout.split('\n')) == 6
