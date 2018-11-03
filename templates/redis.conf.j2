@@ -1,6 +1,8 @@
 # {{ ansible_managed }}
 
-bind {{ redis_bind }}
+{% if redis_bind | length > 0 -%}
+bind {{ redis_bind | join(' ') }}
+{% endif -%}
 protected-mode {{ redis_protected_mode }}
 port {{ redis_port }}
 tcp-backlog {{ redis_tcp_backlog }}
@@ -93,7 +95,6 @@ cluster-node-timeout {{ redis_cluster_node_timeout }}
 cluster-replica-validity-factor {{ redis_cluster_replica_validity_factor }}
 cluster-migration-barrier {{ redis_cluster_migration_barrier }}
 cluster-require-full-coverage {{ redis_cluster_require_full_coverage }}
-cluster-replica-no-failover {{ redis_cluster_replica_no_failover }}
 {% endif -%}
 
 slowlog-log-slower-than {{ redis_slowlog_log_slower_than }}

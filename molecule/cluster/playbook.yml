@@ -5,33 +5,34 @@
   roles:
     - role: ansible-redis-cluster
       redis_cluster_enabled: true
+      redis_bind: []
 
 - name: Converge
   hosts: candidate
 
   pre_tasks:
     - name: get ip of instance-1
-      local_action: 'shell docker inspect -f \{\{range .NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\} instance-1'
+      local_action: shell docker inspect -f '{{ "{{" }}range .NetworkSettings.Networks{{ "}}" }}{{ "{{" }}.IPAddress{{ "}}" }}{{ "{{" }}end{{ "}}" }}' instance-1
       register: instance_1_ip
       changed_when: false
     - name: get ip of instance-2
-      local_action: 'shell docker inspect -f \{\{range .NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\} instance-2'
+      local_action: shell docker inspect -f '{{ "{{" }}range .NetworkSettings.Networks{{ "}}" }}{{ "{{" }}.IPAddress{{ "}}" }}{{ "{{" }}end{{ "}}" }}' instance-2
       register: instance_2_ip
       changed_when: false
     - name: get ip of instance-3
-      local_action: 'shell docker inspect -f \{\{range .NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\} instance-3'
+      local_action: shell docker inspect -f '{{ "{{" }}range .NetworkSettings.Networks{{ "}}" }}{{ "{{" }}.IPAddress{{ "}}" }}{{ "{{" }}end{{ "}}" }}' instance-3
       register: instance_3_ip
       changed_when: false
     - name: get ip of instance-4
-      local_action: 'shell docker inspect -f \{\{range .NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\} instance-4'
+      local_action: shell docker inspect -f '{{ "{{" }}range .NetworkSettings.Networks{{ "}}" }}{{ "{{" }}.IPAddress{{ "}}" }}{{ "{{" }}end{{ "}}" }}' instance-4
       register: instance_4_ip
       changed_when: false
     - name: get ip of instance-5
-      local_action: 'shell docker inspect -f \{\{range .NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\} instance-5'
+      local_action: shell docker inspect -f '{{ "{{" }}range .NetworkSettings.Networks{{ "}}" }}{{ "{{" }}.IPAddress{{ "}}" }}{{ "{{" }}end{{ "}}" }}' instance-5
       register: instance_5_ip
       changed_when: false
     - name: get ip of instance-6
-      local_action: 'shell docker inspect -f \{\{range .NetworkSettings.Networks\}\}\{\{.IPAddress\}\}\{\{end\}\} instance-6'
+      local_action: shell docker inspect -f '{{ "{{" }}range .NetworkSettings.Networks{{ "}}" }}{{ "{{" }}.IPAddress{{ "}}" }}{{ "{{" }}end{{ "}}" }}' instance-6
       register: instance_6_ip
       changed_when: false
     - name: set fact of instance-1
@@ -61,12 +62,13 @@
 
   roles:
     - role: ansible-redis-cluster
+      redis_bind: []
       redis_cluster_enabled: true
       redis_cluster_candidate: true
       redis_cluster_nodes:
-        - '{{ instance_1_ip }}'
-        - '{{ instance_2_ip }}'
-        - '{{ instance_3_ip }}'
-        - '{{ instance_4_ip }}'
-        - '{{ instance_5_ip }}'
-        - '{{ instance_6_ip }}'
+        - '{{ instance_1_ip.stdout }}:6379'
+        - '{{ instance_2_ip.stdout }}:6379'
+        - '{{ instance_3_ip.stdout }}:6379'
+        - '{{ instance_4_ip.stdout }}:6379'
+        - '{{ instance_5_ip.stdout }}:6379'
+        - '{{ instance_6_ip.stdout }}:6379'

@@ -12,11 +12,6 @@
     path: '{{ redis_install_dir }}'
     state: directory
 
-- name: create /etc/redis
-  file:
-    path: '/etc/redis'
-    state: directory
-
 - name: compile redis
   command: make -j{{ ansible_processor_cores | default(1) + 1 }}
   args:
@@ -48,6 +43,12 @@
 - name: create /var/run/redis
   file:
     path: '/var/run/redis'
+    state: directory
+    owner: '{{ redis_user }}'
+
+- name: create /etc/redis
+  file:
+    path: '/etc/redis'
     state: directory
     owner: '{{ redis_user }}'
 
