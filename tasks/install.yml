@@ -45,12 +45,14 @@
     path: '/var/run/redis'
     state: directory
     owner: '{{ redis_user }}'
+    group: '{{ redis_group }}'
 
 - name: create /etc/redis
   file:
     path: '/etc/redis'
     state: directory
     owner: '{{ redis_user }}'
+    group: '{{ redis_group }}'
 
 - name: install redis
   command: 'make PREFIX={{ redis_install_dir }} install'

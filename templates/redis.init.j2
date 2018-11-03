@@ -43,7 +43,7 @@ case "$1" in
     fi
 
     log_daemon_msg "Starting Redis server..."
-    su -s /bin/bash -c "$EXEC $CONF" $REDISUSER
+    $EXEC $CONF
 
     log_end_msg 0
     ;;

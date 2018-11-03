@@ -1,5 +1,22 @@
 ---
+- name: ensure python and pip is installed
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - python
+    - python-pip
+  when: redis_cluster_candidate
+
+- name: ensure pexpect is installed
+  pip:
+    name: pexpect
+  when: redis_cluster_candidate
+
 - name: create a redis cluster
-  command: 'redis-cli --cluster create {{ redis_cluster_nodes | join(" ") }} --cluster-replicas {{ redis_cluster_replicas }}'
-  changed_when: false
+  expect:
+    command: 'redis-cli --cluster create {{ redis_cluster_nodes | join(" ") }} --cluster-replicas {{ redis_cluster_replicas }}'
+    responses:
+      Question:
+        - Can I set the above configuration? (type 'yes' to accept): 'yes'
   when: redis_cluster_candidate

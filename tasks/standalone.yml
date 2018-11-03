@@ -5,6 +5,7 @@
     state: directory
     recurse: true
     owner: '{{ redis_user }}'
+    group: '{{ redis_group }}'
 
 - name: check whether log directory exists
   stat:
