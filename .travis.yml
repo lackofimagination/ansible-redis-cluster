@@ -6,8 +6,12 @@ services:
 
 env:
   - TEST_SCENARIO=default
+  - TEST_SCENARIO=upload
   - TEST_SCENARIO=dual
   - TEST_SCENARIO=cluster
+
+before_install:
+  - wget http://download.redis.io/releases/redis-5.0.0.tar.gz -P /home/travis/
 
 install:
   - pip install molecule docker

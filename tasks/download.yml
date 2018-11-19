@@ -1,8 +1,15 @@
 ---
+- name: upload redis
+  copy:
+    src: '{{ redis_local_dir }}'
+    dest: '/usr/local/src/redis-{{ redis_version }}.tar.gz'
+  when: redis_upload_local
+
 - name: download redis
   get_url:
     url: '{{ redis_download_url }}'
     dest: '/usr/local/src/redis-{{ redis_version }}.tar.gz'
+  when: not redis_upload_local
 
 - name: extract redis tarball
   unarchive:

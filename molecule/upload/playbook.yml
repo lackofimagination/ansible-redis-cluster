@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: ansible-redis-cluster
+      redis_upload_local: true
