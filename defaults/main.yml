@@ -21,8 +21,8 @@ redis_tcp_backlog: 511
 redis_unixsocket: ''
 redis_timeout: 0
 redis_tcp_keepalive: 300
-redis_daemonize: 'yes'
-redis_supervised: 'no'
+redis_daemonize: 'no'
+redis_supervised: 'systemd'
 redis_pidfile: '/var/run/redis/{{ redis_port }}.pid'
 redis_loglevel: 'notice'
 redis_logfile: '""'

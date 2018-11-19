@@ -27,8 +27,8 @@ def test_redis_conf_file(host):
     assert 'tcp-backlog 511' in s
     assert 'timeout 0' in s
     assert 'tcp-keepalive 300' in s
-    assert 'daemonize yes' in s
-    assert 'supervised no' in s
+    assert 'daemonize no' in s
+    assert 'supervised systemd' in s
     assert 'pidfile /var/run/redis/6379.pid' in s
     assert 'loglevel notice' in s
     assert 'logfile ""' in s
@@ -80,8 +80,8 @@ def test_redis_conf_file(host):
     assert 'lfu-decay-time 1' in s
 
 
-def test_redis_init_file(host):
-    f = host.file('/etc/init.d/redis-6379')
+def test_redis_systemd_file(host):
+    f = host.file('/etc/systemd/system/redis-6379.service')
 
     assert f.exists
 

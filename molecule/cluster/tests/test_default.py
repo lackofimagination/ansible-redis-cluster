@@ -27,7 +27,7 @@ def test_redis_nodes_file(host):
 
 
 def test_redis_init_file(host):
-    f = host.file('/etc/init.d/redis-6379')
+    f = host.file('/etc/systemd/system/redis-6379.service')
 
     assert f.exists
 

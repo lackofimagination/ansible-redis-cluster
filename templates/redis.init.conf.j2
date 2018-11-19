@@ -1,6 +1,0 @@
-{% if redis_requirepass -%}
-REDISPASS="{{ redis_requirepass }}"
-{% endif -%}
-{% if redis_bind | length > 0 -%}
-BINDADDRESS="{{ redis_bind[0] }}"
-{% endif -%}

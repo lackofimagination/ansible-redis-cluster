@@ -37,9 +37,9 @@ def test_redis_conf_6379_file(host):
     assert 'port 6379' in s
 
 
-def test_redis_init_file(host):
-    f1 = host.file('/etc/init.d/redis-6378')
-    f2 = host.file('/etc/init.d/redis-6379')
+def test_redis_systemd_file(host):
+    f1 = host.file('/etc/systemd/system/redis-6378.service')
+    f2 = host.file('/etc/systemd/system/redis-6379.service')
 
     assert f1.exists
     assert f2.exists
